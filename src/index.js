@@ -11,6 +11,7 @@ function getMakeups(){
     .then(r => r.json())
     .then(makeups => {
         makeups.data.forEach(makeup => {
+            debugger
             const makeupMarkup = `
             <div data-id=${makeup.id}>
               <h2>${makeup.attributes.product_name}</h2>
@@ -19,8 +20,7 @@ function getMakeups(){
               <p>${makeup.attributes.shade}</p>
               <p>${makeup.attributes.skin_tone}</p>
               <p>${makeup.attributes.skin_type}</p>
-              <p>${makeup.attributes.reviews.forEach(
-              })}</p>
+              <p>${makeup.attributes.reviews}</p>
     
             </div>
             <br><br>`;

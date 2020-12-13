@@ -36,16 +36,41 @@ createMakeupForm.addEventListener("submit", (e) => createFormHandler(e))
 
 function createFormHandler(e){
     e.preventDefault()
-    const productName = document.querySelector("#product_name").value
-    const productType = document.querySelector("#product_type").value
-    const skinType = document.querySelector("#skin_type").value
-    const skinTone = document.querySelector("#skin_tone").value
+    const product_name = document.querySelector("#product_name").value
+    const product_type = document.querySelector("#product_type").value
+    const skin_type = document.querySelector("#skin_type").value
+    const skin_tone = document.querySelector("#skin_tone").value
     const brand = document.querySelector("#brand").value 
     const shade = document.querySelector("#shade").value
-    postMakeup(productName, productType, skinType, skinTone, brand, shade)
+    postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade)
 
 }
 
-function postMakeup(productName, productType, skinType, skinTone, brand, shade) {
-    console.log(productName, productType, skinType, skinTone, brand, shade)
+function postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade) {
+    let bodyData = {product_name, product_type, skin_type, skin_tone, brand, shade}
+    let configObj = {
+        method: "POST",
+        headers: {
+            "content-type":"application/json",
+            "accept":"application/json"
+        },
+        body: JSON.stringify(bodyData)
+    }
+
+    fetch(endPoint, configObj)
+    .then(r => r.json())
+    .then(makeup => {
+        const makeupMarkup =`
+        <div data-id=${makeup.id}>
+        <h2>${makeup.product_name}</h2>
+        <h3>${makeup.brand}</h3>
+        <p>${makeup.product_type}</p>
+        <p>${makeup.shade}</p>
+        <p>${makeup.skin_tone}</p>
+        <p>${makeup.skin_type}</p>
+        </div>
+        <br><br>`
+
+        document.querySelector("#makeup_container").innerHTML += makeupMarkup
+    })
 }

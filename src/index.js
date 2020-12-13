@@ -1,6 +1,7 @@
 console.log("here")
 
 const endPoint = "http://localhost:3000/makeups"
+const createMakeupForm = document.getElementById("create-makeup-form")
 
 document.addEventListener("DOMContentLoaded", () => {
     getMakeups()
@@ -11,7 +12,7 @@ function getMakeups(){
     .then(r => r.json())
     .then(makeups => {
         makeups.data.forEach(makeup => {
-            debugger
+            
             const makeupMarkup = `
             <div data-id=${makeup.id}>
               <h2>${makeup.attributes.product_name}</h2>
@@ -29,4 +30,22 @@ function getMakeups(){
             makeupContainer.innerHTML += makeupMarkup
         })
     })
+}
+
+createMakeupForm.addEventListener("submit", (e) => createFormHandler(e))
+
+function createFormHandler(e){
+    e.preventDefault()
+    const productName = document.querySelector("#product_name").value
+    const productType = document.querySelector("#product_type").value
+    const skinType = document.querySelector("#skin_type").value
+    const skinTone = document.querySelector("#skin_tone").value
+    const brand = document.querySelector("#brand").value 
+    const shade = document.querySelector("#shade").value
+    postMakeup(productName, productType, skinType, skinTone, brand, shade)
+
+}
+
+function postMakeup(productName, productType, skinType, skinTone, brand, shade) {
+    console.log(productName, productType, skinType, skinTone, brand, shade)
 }

@@ -69,12 +69,12 @@ renderMakeup(){
 
   reviewForm.addEventListener("submit", Review.createReview)
 
-//   const reviewList = document.createElement("ul")
-//   this.reviews.forEach(review => {
-//       let reviewObj = new Review(review)
-//       reviewObj.renderReview(reviewList)
-//   })
-  makeupDiv.append(productName, brand, productType, shade, skinTone, skinType, reviewForm)
+  const reviewList = document.createElement("ul")
+  this.reviews.forEach(review => {
+      let reviewObj = new Review(review)
+      reviewObj.renderReview(reviewList)
+  })
+  makeupDiv.append(productName, brand, productType, shade, skinTone, skinType, reviewForm, reviewList)
 
   makeupContainer.appendChild(makeupDiv)
 
@@ -89,7 +89,7 @@ static formHandler(e){
     const skin_tone = document.querySelector("#skin_tone").value
     const brand = document.querySelector("#brand").value 
     const shade = document.querySelector("#shade").value
-    postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade)
+    Makeup.postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade)
 }
 
 static postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade){
@@ -106,6 +106,7 @@ static postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade
     fetch(endPoint, configObj)
     .then(r => r.json())
     .then(makeup => {
+        debugger
         let newMakeup = new Makeup(makeup.data)
         newMakeup.renderMakeup()
     })

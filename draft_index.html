@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Aphrodites' Mirror</title>
+
+</head>
+<body>
+    <h1>Aphrodites' Mirror</h1>
+    <div class="form-container">
+
+        <form id="create-makeup-form">
+            <h3>Create makeup!</h3>
+            <label for="product_name">Product Name</label>
+            <input id='product_name' type="text" name="product_name" value="" class="input-text">
+            <br><br>
+            <label for="product_type">Product Type</label>
+            <select id='product_type' name="product_type" value="" >
+              <option value="eye shadow">Eye Shadow</option>
+              <option value="eye liner">Eye Liner</option>
+              <option value="mascara">Mascara</option>
+              <option value="lipstick">Lipstick</option>
+              <option value="liquid foundation">Liquid Foundation</option>
+              <option value="powder foundation">Powder Foundation</option>
+              <option value="blush">Blush</option>
+            </select>
+
+          <label for="skin_type">Skin Type</label>
+          <select name="skin_type" id="skin_type" value="">
+              <option value="Oily">Oily</option>
+              <option value="Dry">Dry</option>
+              <option value="Any">Any</option>
+          </select>
+      
+          <label for="skin_tone">Skin Tone</label>
+          <select id="skin_tone" name="skin_tone" value="">
+            <option value="Deep Dark">Deep Dark</option>
+            <option value="Dark">Dark</option>
+            <option value="Medium">Medium</option>
+            <option value="Light">Light</option>
+            <option value="n/a">N/A</option>
+          </select>
+          <br><br>
+          <label for="brand">Brand</label>
+          <select name="brand" id="brand" value="">
+              <option value="MAC">MAC</option>
+              <option value="Fenty">Fenty</option>
+              <option value="Loreal">L'Oréal</option>
+              <option value="Nars">Nars</option>
+              <option value="NYX">NYX</option>
+              <option value="Glossier">Glossier</option>
+              <option value="Maybelline">Maybelline</option>
+          </select>
+          <br><br>
+          <label for="shade">Shade</label>
+          <input type="text" name="shade" id="shade" value="">
+          <br><br>
+          <input id= 'create-button' type="submit" name="submit" value="Create New Makeup" class="btn btn-primary">
+        </form>
+      
+      </div>
+    <div id="makeup_container"></div>
+    <script src="./src/makeup.js"></script>
+    <script src="./src/review.js"></script>
+    <script src="./src/index.js"></script>
+</body>
+</html>
+

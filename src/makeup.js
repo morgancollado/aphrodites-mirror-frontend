@@ -34,6 +34,7 @@ static fetchMakeup(){
 renderMakeup(){
     const makeupDiv = document.createElement("div")
     makeupDiv.dataset.id = this.id
+    
 
     const productName = document.createElement("h2")
     productName.innerText = this.product_name

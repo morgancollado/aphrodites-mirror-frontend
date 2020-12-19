@@ -10,8 +10,8 @@ class Review {
     static createReview(e){
         e.preventDefault()
     
-        const commentInput = e.target.children[1].value
-        const starInput = parseInt(e.target.children[3].value)
+        const commentInput = e.target.children[2].value
+        const starInput = parseInt(e.target.children[4].value)
         const makeupId = parseInt(e.target.parentElement.dataset.id)
         const reviewList = e.target.nextElementSibling
         
@@ -23,14 +23,15 @@ class Review {
 
     renderReview(reviewList){
         const commentLi = document.createElement('li')
+        const outerstarDiv = document.createElement("div")
+        const innerstarDiv = document.createElement("div")
+        outerstarDiv.classList.add("stars-outer")
+        innerstarDiv.classList.add("stars-inner")
+        outerstarDiv.appendChild(innerstarDiv)
         commentLi.dataset.id = this.makeup_id
-        commentLi.innerText = this.comment
-        const starLi = document.createElement("li")
-        starLi.dataset.id = this.makeup_id
-        starLi.innerText = this.stars
-
-        commentLi.appendChild(starLi)
-        reviewList.appendChild(commentLi)
+        commentLi.classList.add('list-group-item')
+        commentLi.innerText = `${this.comment} - ${this.stars} Star(s)`
+        reviewList.append(commentLi, outerstarDiv)
     }
 
     static submitReview(comment, stars, makeupId, reviewList){

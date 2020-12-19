@@ -34,28 +34,36 @@ static fetchMakeup(){
 renderMakeup(){
     const makeupDiv = document.createElement("div")
     makeupDiv.dataset.id = this.id
+    makeupDiv.classList.add("card")
+
+    const cardDiv = document.createElement("div")
+    cardDiv.classList.add("card-body")
     
 
     const productName = document.createElement("h2")
-    productName.innerText = this.product_name
+    productName.classList.add("card-title")
+    productName.innerText = `Product Name: ${this.product_name}`
 
-    const brand = document.createElement("h3")
-    brand.innerText = this.brand
+    const brand = document.createElement("h4")
+    brand.innerText = `Brand: ${this.brand}`
+    brand.classList.add("card-text")
 
     const productType = document.createElement("p")
-    productType.innerText = this.product_type
+    productType.innerText = `Product Type: ${this.product_type}`
 
     const shade = document.createElement("p")
-    shade.innerText = this.shade
+    shade.innerText = `Shade: ${this.shade}`
 
     const skinTone = document.createElement("p")
-    skinTone.innerText = this.skin_tone
+    skinTone.innerText = `Skin Tone: ${this.skin_tone}`
 
     const skinType = document.createElement("p")
-    skinType.innerText = this.skin_type
+    skinType.innerText = `Skin Type: ${this.skin_type}`
 
     const reviewForm = document.createElement('form')
+    reviewForm.classList.add("form-container")
     reviewForm.innerHTML += `
+    <h5>Leave a Review</h5>
     <label for="comment">Comment</label>
     <input id="review-comment" name="comment">
     <label for="stars">Stars</label>
@@ -66,16 +74,19 @@ renderMakeup(){
         <option value="4">4</option>
         <option value="5">5</option>
     </select>
-  <input id='create-review' type="submit" name="submit" value="Create Review">`
+  <input id='create-review' type="submit" name="submit" value="Create Review">
+  <h6>User Reviews</h6>
+  `
 
   reviewForm.addEventListener("submit", Review.createReview)
 
   const reviewList = document.createElement("ul")
+  reviewList.classList.add("list-group")
   this.reviews.forEach(review => {
       let reviewObj = new Review(review)
       reviewObj.renderReview(reviewList)
   })
-  makeupDiv.append(productName, brand, productType, shade, skinTone, skinType, reviewForm, reviewList)
+  makeupDiv.append(cardDiv, productName, brand, productType, shade, skinTone, skinType, reviewForm, reviewList)
 
   makeupContainer.appendChild(makeupDiv)
 
@@ -107,7 +118,7 @@ static postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade
     fetch(endPoint, configObj)
     .then(r => r.json())
     .then(makeup => {
-        debugger
+        
         let newMakeup = new Makeup(makeup.data)
         newMakeup.renderMakeup()
     })

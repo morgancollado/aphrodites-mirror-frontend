@@ -31,4 +31,6 @@
   footer p {
     margin-bottom: .25rem;
   }
-  
+  .checked {
+    color: orange;
+  }

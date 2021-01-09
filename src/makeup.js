@@ -11,6 +11,8 @@ class Makeup {
         this.skin_tone = makeup.attributes.skin_tone
         this.skin_type = makeup.attributes.skin_type
         this.reviews = makeup.attributes.reviews
+        this.reviewavg = makeup.attributes.avgreview
+        
         Makeup.allMakeup.push(this)
     }
 
@@ -31,6 +33,20 @@ static fetchMakeup(){
     })
 }
 
+updateRating() {
+    // go through all the make ups this.reviews, map through and reduce
+    debugger
+
+    const reviews = this.reviews
+
+    const avgArray = Array.from(reviews, review => review.stars)
+
+    const newAvg = avgArray.reduce((a,b) => a+b)/this.reviews.length
+    
+
+    this.reviewAvg = newAvg
+}
+
 renderMakeup(){
     const makeupDiv = document.createElement("div")
     makeupDiv.dataset.id = this.id
@@ -39,7 +55,6 @@ renderMakeup(){
     const cardDiv = document.createElement("div")
     cardDiv.classList.add("card-body")
     
-
     const productName = document.createElement("h2")
     productName.classList.add("card-title")
     productName.innerText = `Product Name: ${this.product_name}`
@@ -59,6 +74,9 @@ renderMakeup(){
 
     const skinType = document.createElement("p")
     skinType.innerText = `Skin Type: ${this.skin_type}`
+
+    const reviewAvg = document.createElement("p")
+    reviewAvg.innerText = `Review Average : ${this.reviewavg} stars`
 
     const reviewForm = document.createElement('form')
     reviewForm.classList.add("form-container")
@@ -86,7 +104,7 @@ renderMakeup(){
       let reviewObj = new Review(review)
       reviewObj.renderReview(reviewList)
   })
-  makeupDiv.append(cardDiv, productName, brand, productType, shade, skinTone, skinType, reviewForm, reviewList)
+  makeupDiv.append(cardDiv, productName, brand, productType, shade, skinTone, skinType, reviewAvg, reviewForm, reviewList)
 
   makeupContainer.appendChild(makeupDiv)
 
@@ -123,5 +141,6 @@ static postMakeup(product_name, product_type, skin_type, skin_tone, brand, shade
         newMakeup.renderMakeup()
     })
 }
+
 
 }

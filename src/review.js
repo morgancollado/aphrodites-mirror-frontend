@@ -14,10 +14,16 @@ class Review {
         const starInput = parseInt(e.target.children[4].value)
         const makeupId = parseInt(e.target.parentElement.dataset.id)
         const reviewList = e.target.nextElementSibling
-        
+
+        // go through all the make up to find the object you want, find the make up, push this review onto the makeup review list 
+        // const makeup = 
         
 
-        Review.submitReview(commentInput, starInput, makeupId, reviewList)
+        const review = Review.submitReview(commentInput, starInput, makeupId, reviewList)
+
+        
+
+
         e.target.reset()
     }
 
@@ -26,11 +32,14 @@ class Review {
         const outerstarDiv = document.createElement("div")
         const innerstarDiv = document.createElement("div")
         outerstarDiv.classList.add("stars-outer")
+        outerstarDiv.classList.add("text-right")
         innerstarDiv.classList.add("stars-inner")
         outerstarDiv.appendChild(innerstarDiv)
         commentLi.dataset.id = this.makeup_id
+        outerstarDiv.dataset.id = this.makeup_id
         commentLi.classList.add('list-group-item')
-        commentLi.innerText = `${this.comment} - ${this.stars} Star(s)`
+        commentLi.innerText = `${this.comment} - Star rating below`
+        outerstarDiv.innerText = `${this.stars}`
         reviewList.append(commentLi, outerstarDiv)
     }
 
@@ -55,6 +64,17 @@ class Review {
             
             let newReview = new Review(review.data.attributes)
             newReview.renderReview(reviewList)
+            
+
+            const makeup = Makeup.allMakeup.find(m => parseInt(m.id) === newReview.makeup_id)
+            
+            
+            
+            
+
+            makeup.reviews.push(newReview)
+            makeup.updateRating()
+            
         })
     }
 

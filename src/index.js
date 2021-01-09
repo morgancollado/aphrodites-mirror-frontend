@@ -5,4 +5,6 @@ const makeupContainer = document.getElementById("makeup_container")
 
 Makeup.fetchMakeup()
 
+
 createMakeupForm.addEventListener("submit", Makeup.formHandler)
+

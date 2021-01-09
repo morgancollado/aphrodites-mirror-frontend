@@ -35,16 +35,14 @@ static fetchMakeup(){
 
 updateRating() {
     // go through all the make ups this.reviews, map through and reduce
-    debugger
-
-    const reviews = this.reviews
-
-    const avgArray = Array.from(reviews, review => review.stars)
-
-    const newAvg = avgArray.reduce((a,b) => a+b)/this.reviews.length
+    const starArray = this.reviews.map(r => r.stars)
     
+    const avgReview = starArray.reduce((a,b) => a+b)/this.reviews.length
 
-    this.reviewAvg = newAvg
+    this.reviewavg = avgReview
+
+    const updatedAvg = document.getElementById("reviewAvg")
+    updatedAvg.innerText = `Review Average : ${avgReview} stars`
 }
 
 renderMakeup(){
@@ -76,6 +74,7 @@ renderMakeup(){
     skinType.innerText = `Skin Type: ${this.skin_type}`
 
     const reviewAvg = document.createElement("p")
+    reviewAvg.setAttribute("id", "reviewAvg")
     reviewAvg.innerText = `Review Average : ${this.reviewavg} stars`
 
     const reviewForm = document.createElement('form')

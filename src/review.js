@@ -67,13 +67,11 @@ class Review {
             
 
             const makeup = Makeup.allMakeup.find(m => parseInt(m.id) === newReview.makeup_id)
-            
-            
-            
-            
+
 
             makeup.reviews.push(newReview)
             makeup.updateRating()
+            
             
         })
     }

@@ -41,7 +41,8 @@ updateRating() {
 
     this.reviewavg = avgReview
 
-    const updatedAvg = document.getElementById("reviewAvg")
+    const updatedAvg = document.querySelector(`[data-review~="${this.id}"]`)
+    
     updatedAvg.innerText = `Review Average : ${avgReview} stars`
 }
 
@@ -74,6 +75,7 @@ renderMakeup(){
     skinType.innerText = `Skin Type: ${this.skin_type}`
 
     const reviewAvg = document.createElement("p")
+    reviewAvg.dataset.review = this.id
     reviewAvg.setAttribute("id", "reviewAvg")
     reviewAvg.innerText = `Review Average : ${this.reviewavg} stars`
 
